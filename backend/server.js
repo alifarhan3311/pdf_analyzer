@@ -18,5 +18,12 @@ const transactionRoutes = require('./controllers/transactionController');
 app.use('/api/process', processRoutes);
 app.use('/api/transactions', transactionRoutes);
 
-const PORT = process.env.PORT || 5000;
+// Serve static frontend files
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
+
+const PORT = process.env.PORT || 5555;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

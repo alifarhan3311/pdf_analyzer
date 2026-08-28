@@ -19,7 +19,7 @@ function App() {
 
   const fetchTransactions = async (srcFile) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/transactions?sourceFile=${encodeURIComponent(srcFile)}`);
+      const res = await fetch(`http://localhost:5555/api/transactions?sourceFile=${encodeURIComponent(srcFile)}`);
       const data = await res.json();
       setTransactions(data);
     } catch (err) {
@@ -46,7 +46,7 @@ function App() {
     formData.append('file', file);
     
     try {
-      const response = await fetch('http://localhost:5000/api/process/upload', {
+      const response = await fetch('http://localhost:5555/api/process/upload', {
         method: 'POST',
         body: formData
       });
@@ -63,7 +63,7 @@ function App() {
         const jobId = data.jobId;
         const pollInterval = setInterval(async () => {
           try {
-            const statusRes = await fetch(`http://localhost:5000/api/process/status/${jobId}`);
+            const statusRes = await fetch(`http://localhost:5555/api/process/status/${jobId}`);
             if (!statusRes.ok) return;
             
             const statusData = await statusRes.json();
@@ -104,7 +104,7 @@ function App() {
 
   const handleSaveEdit = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/transactions/${editingId}`, {
+      const res = await fetch(`http://localhost:5555/api/transactions/${editingId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editForm)
@@ -121,7 +121,7 @@ function App() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this record?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/transactions/${id}`, { method: 'DELETE' });
+      const res = await fetch(`http://localhost:5555/api/transactions/${id}`, { method: 'DELETE' });
       if (res.ok) {
         setTransactions(transactions.filter(t => t._id !== id));
       }
@@ -133,7 +133,7 @@ function App() {
   const handleAddSubmit = async () => {
     try {
       const newTx = { ...addForm, sourceFile: sourceFile || 'Manual Entry' };
-      const res = await fetch('http://localhost:5000/api/transactions', {
+      const res = await fetch('http://localhost:5555/api/transactions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTx)
@@ -151,7 +151,7 @@ function App() {
 
   const handleExport = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/transactions/export', {
+      const res = await fetch('http://localhost:5555/api/transactions/export', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sourceFile })
