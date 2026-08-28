@@ -2,6 +2,14 @@
 
 This document provides a complete overview of the Bank Statement Analyzer project, detailing the technologies used, their purpose, and the step-by-step flow of how the entire system works from end to end.
 
+## ✨ Core Features
+- **Secure PDF Uploads**: Users can upload raw bank statement PDFs directly through the browser.
+- **Real-Time Progress Tracking**: The UI polls the backend to stream live AI processing logs (e.g., "OCR on page 1...") directly to the screen.
+- **Interactive Data Table**: Extracted transactions are displayed in a clean, tabular format.
+- **Full CRUD Capabilities**: Users can manually **Add**, **Edit**, or **Delete** transaction records directly in the table to fix AI mistakes or input missing data.
+- **Custom Excel Export**: Download the finalized records formatted strictly into the required *01 MasterFile Bookkeeping* Excel layout with a single click.
+- **Smart AI Caching**: Re-uploading a previously processed PDF instantly loads the data from the database, saving massive AI compute time.
+
 ---
 
 ## 🛠️ Technologies Used
