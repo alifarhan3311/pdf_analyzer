@@ -1,0 +1,9 @@
+transformers
+torch
+torchvision
+pymupdf
+pandas
+openpyxl
+opencv-python
+accelerate
+PyYAML

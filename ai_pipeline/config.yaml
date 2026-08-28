@@ -1,0 +1,22 @@
+model_name: "Qwen/Qwen2-VL-2B-Instruct"  # Using 2B variant due to 4GB VRAM constraint
+dpi: 200
+excel_columns:
+  - "Accounts:"
+  - "Date:"
+  - "Descriptions:"
+  - "Dr"
+  - "Cr"
+  - "Amount"
+  - "Head of Accounts"
+
+prompt: |
+  You are analyzing one page of a bank statement. Extract every transaction row visible.
+  Return ONLY a valid JSON array, no markdown, no commentary:
+  [
+    {"date": "", "description": "", "debit": "", "credit": "", "balance": ""}
+  ]
+  Rules:
+  - If a field is not present, use empty string "".
+  - Do not summarize or skip any row, including small/fee transactions.
+  - Preserve description text exactly as printed, do not translate or paraphrase.
+  - If the page has no transactions (e.g. cover page, T&Cs page), return [].
